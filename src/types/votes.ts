@@ -1,6 +1,6 @@
-export type VoteType = "good" | "neutral" | "bad";
+export type VoteOption = "good" | "neutral" | "bad";
 
-export interface VoteState {
+export interface VoteStats {
   good: number;
   neutral: number;
   bad: number;

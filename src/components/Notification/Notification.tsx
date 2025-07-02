@@ -1,10 +1,11 @@
 import styles from "./Notification.module.css";
+import type { FC } from "react";
 
-interface Props {
+interface NotificationProps {
   message: string;
 }
 
-const Notification = ({ message }: Props) => {
+const Notification: FC<NotificationProps> = ({ message }) => {
   return <p className={styles.message}>{message}</p>;
 };
 
