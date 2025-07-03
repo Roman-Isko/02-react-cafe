@@ -5,17 +5,17 @@ import CafeInfo from "../CafeInfo/CafeInfo";
 import Notification from "../Notification/Notification";
 
 import { useState } from "react";
-import type { VoteOption, VoteStats as IVoteStats } from "../../types/votes";
+import type { VoteType, Votes } from "../../types/votes";
 
 const App = () => {
-  const [votes, setVotes] = useState<IVoteStats>({
+  const [votes, setVotes] = useState<Votes>({
     good: 0,
     neutral: 0,
     bad: 0,
   });
 
-  const handleVote = (option: VoteOption) => {
-    setVotes((prev) => ({ ...prev, [option]: prev[option] + 1 }));
+  const handleVote = (type: VoteType) => {
+    setVotes((prev) => ({ ...prev, [type]: prev[type] + 1 }));
   };
 
   const resetVotes = () => {
@@ -23,6 +23,8 @@ const App = () => {
   };
 
   const total = votes.good + votes.neutral + votes.bad;
+  const positiveRate =
+    total > 0 ? `${Math.round((votes.good / total) * 100)}%` : "0%";
 
   return (
     <div className={styles.container}>
@@ -35,7 +37,11 @@ const App = () => {
       {total === 0 ? (
         <Notification message="No feedback given" />
       ) : (
-        <VoteStats votes={votes} />
+        <VoteStats
+          votes={votes}
+          totalVotes={total}
+          positiveRate={positiveRate}
+        />
       )}
     </div>
   );

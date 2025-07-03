@@ -1,32 +1,20 @@
-import styles from "./VoteStats.module.css";
-import type { VoteStats as IVoteStats } from "../../types/votes";
+import css from "./VoteStats.module.css";
+import type { Votes } from "../../types/votes";
 
 interface VoteStatsProps {
-  votes: IVoteStats;
+  votes: Votes;
+  totalVotes: number;
+  positiveRate: string;
 }
 
-const VoteStats = ({ votes }: VoteStatsProps) => {
-  const total = votes.good + votes.neutral + votes.bad;
-  const positivePercentage =
-    total > 0 ? Math.round((votes.good / total) * 100) : 0;
-
+const VoteStats = ({ votes, totalVotes, positiveRate }: VoteStatsProps) => {
   return (
-    <ul className={styles.stats}>
-      <li>
-        Good: <span>{votes.good}</span>
-      </li>
-      <li>
-        Neutral: <span>{votes.neutral}</span>
-      </li>
-      <li>
-        Bad: <span>{votes.bad}</span>
-      </li>
-      <li>
-        Total: <span>{total}</span>
-      </li>
-      <li>
-        Positive: <span>{positivePercentage}%</span>
-      </li>
+    <ul className={css.list}>
+      <li className={css.item}>Good: {votes.good}</li>
+      <li className={css.item}>Neutral: {votes.neutral}</li>
+      <li className={css.item}>Bad: {votes.bad}</li>
+      <li className={css.item}>Total: {totalVotes}</li>
+      <li className={css.item}>Positive: {positiveRate}</li>
     </ul>
   );
 };
