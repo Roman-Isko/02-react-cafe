@@ -23,8 +23,7 @@ const App = () => {
   };
 
   const total = votes.good + votes.neutral + votes.bad;
-  const positiveRate =
-    total > 0 ? `${Math.round((votes.good / total) * 100)}%` : "0%";
+  const positiveRate = total > 0 ? (votes.good / total) * 100 : 0;
 
   return (
     <div className={styles.container}>
